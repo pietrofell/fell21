@@ -78,4 +78,37 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-emerald-950/30 border border-emerald-900 p-4 rounded-lg">
                         <h4 class="font-bold text-emerald-400 flex items-center gap-2 mb-2 text-sm">✅ Vantagens no Chão de Fábrica</h4>
-                        <ul id="
+                        <ul id="lista-vantagens" class="list-disc list-inside text-xs text-slate-300 space-y-2"></ul>
+                    </div>
+                    <div class="bg-rose-950/30 border border-rose-900 p-4 rounded-lg">
+                        <h4 class="font-bold text-rose-400 flex items-center gap-2 mb-2 text-sm">❌ Desvantagens no Chão de Fábrica</h4>
+                        <ul id="lista-desvantagens" class="list-disc list-inside text-xs text-slate-300 space-y-2"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-800 text-slate-600 text-center py-4 text-xs mt-8">
+        &copy; 2026 NetFactory - Automação e Conectividade Industrial.
+    </footer>
+
+    <script>
+        // Dados da Aba 1 (Cabos)
+        const bancoCabos = {
+            'par-trancado': {
+                titulo: 'Par Trançado (Cabo de Rede Blindado)',
+                texto: 'Muito utilizado para conectar o CLP (Controlador Lógico Programável) aos switches da fábrica e aos sistemas de supervisão (SCADA). No chão de fábrica, ele usa uma blindagem metálica externa (STP) para evitar que o ruído magnético gerado por motores elétricos estrague os dados trafegados.'
+            },
+            'fibra': {
+                titulo: 'Fibra Óptica',
+                texto: 'Usada para fazer a interligação de redes entre galpões distantes ou para passar por calhas elétricas de alta tensão. Como transmite luz ao invés de eletricidade, ela é totalmente imune a ruídos elétricos e não queima equipamentos em caso de surtos elétricos na planta.'
+            },
+            'wireless': {
+                titulo: 'Wireless (Redes Industriais Sem Fio)',
+                texto: 'Aplicada para conectar sensores isolados, braços robóticos em movimento, pontes rolantes ou os AGVs (veículos autônomos que carregam cargas pela fábrica). Evita o desgaste físico e a quebra de cabos que se moveriam constantemente.'
+            }
+        };
+
+        // Dados da Aba 2

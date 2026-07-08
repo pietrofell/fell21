@@ -7,7 +7,7 @@
   <!-- Fonte e ícones -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -18,76 +18,80 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #f5f7fc 0%, #e6ecf5 100%);
+      background: #0b1a2a;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1.5rem;
+      background-image: radial-gradient(circle at 20% 30%, #132d44 0%, #07111c 100%);
     }
 
+    /* Main card com efeito vidro e borda neon */
     .card-principal {
-      max-width: 1300px;
+      max-width: 1350px;
       width: 100%;
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(18, 38, 58, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-radius: 48px;
-      box-shadow: 0 25px 50px -8px rgba(0,20,40,0.25), 0 8px 20px rgba(0,0,0,0.08);
-      padding: 2.5rem 2.8rem;
-      transition: all 0.2s ease;
-      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(64, 164, 255, 0.15);
+      padding: 2.8rem 3rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(70, 160, 255, 0.20);
     }
 
     /* cabeçalho */
     .header {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 18px;
       margin-bottom: 2.5rem;
-      border-bottom: 2px solid rgba(0, 60, 120, 0.15);
-      padding-bottom: 1.2rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 2px solid rgba(64, 164, 255, 0.20);
     }
 
     .header i {
-      font-size: 2.6rem;
-      color: #0a4b7a;
-      background: #dce8f5;
-      padding: 12px;
-      border-radius: 20px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+      font-size: 2.8rem;
+      color: #7fc2ff;
+      background: rgba(30, 100, 180, 0.25);
+      padding: 14px;
+      border-radius: 24px;
+      box-shadow: 0 0 20px rgba(64, 164, 255, 0.2);
+      border: 1px solid rgba(64, 164, 255, 0.25);
     }
 
     .header h1 {
-      font-weight: 700;
-      font-size: 2.1rem;
+      font-weight: 800;
+      font-size: 2.2rem;
       letter-spacing: -0.5px;
-      color: #0a2a44;
-      background: linear-gradient(135deg, #0a2a44, #1f6390);
+      background: linear-gradient(135deg, #b5d9ff, #7fc2ff, #4da0e8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-shadow: 0 0 30px rgba(64, 164, 255, 0.2);
     }
 
     .header span {
-      font-weight: 400;
+      font-weight: 500;
       font-size: 1rem;
-      color: #2c5779;
-      background: rgba(10, 75, 122, 0.08);
-      padding: 4px 16px;
+      color: #9ac2e6;
+      background: rgba(40, 120, 200, 0.20);
+      padding: 6px 20px;
       border-radius: 40px;
-      margin-left: 6px;
-      -webkit-text-fill-color: #2c5779;
-      border: 1px solid rgba(10, 75, 122, 0.15);
+      margin-left: 8px;
+      border: 1px solid rgba(64, 164, 255, 0.25);
+      -webkit-text-fill-color: #9ac2e6;
+      backdrop-filter: blur(4px);
     }
 
     /* Abas */
     .abas {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 2.8rem;
-      border-bottom: 2px solid rgba(0,0,0,0.05);
-      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(64, 164, 255, 0.10);
+      padding-bottom: 0.2rem;
     }
 
     .aba-btn {
@@ -95,41 +99,43 @@
       border: none;
       font-size: 1.1rem;
       font-weight: 600;
-      padding: 0.8rem 2rem;
+      padding: 0.8rem 2.2rem;
       border-radius: 60px;
-      color: #3c5e7a;
+      color: #8bb4d9;
       cursor: pointer;
-      transition: all 0.2s ease;
-      letter-spacing: -0.2px;
+      transition: all 0.25s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: rgba(200, 215, 235, 0.2);
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
     }
 
     .aba-btn i {
       font-size: 1.2rem;
-      color: #3f6a8a;
+      color: #6ca6d4;
     }
 
     .aba-btn:hover {
-      background: rgba(30, 80, 130, 0.08);
-      color: #0a3b5e;
+      background: rgba(64, 164, 255, 0.08);
+      color: #c7e2ff;
+      border-color: rgba(64, 164, 255, 0.15);
     }
 
     .aba-btn.active {
-      background: #0a3b5e;
+      background: linear-gradient(145deg, rgba(30, 100, 180, 0.30), rgba(20, 70, 130, 0.20));
       color: white;
-      box-shadow: 0 8px 18px -6px rgba(10, 59, 94, 0.4);
+      border-color: rgba(64, 164, 255, 0.40);
+      box-shadow: 0 8px 24px -6px rgba(0, 80, 180, 0.3);
     }
 
     .aba-btn.active i {
-      color: white;
+      color: #7fc2ff;
     }
 
     .conteudo-aba {
       display: none;
-      animation: fadeSubir 0.25s ease;
+      animation: fadeSubir 0.3s ease;
     }
 
     .conteudo-aba.active {
@@ -137,224 +143,283 @@
     }
 
     @keyframes fadeSubir {
-      0% { opacity: 0.4; transform: translateY(10px); }
+      0% { opacity: 0.3; transform: translateY(12px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards Cabos */
+    /* Cards Cabos - estilo industrial com brilho */
     .grid-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
       margin-top: 0.4rem;
     }
 
     .card-cabo {
-      background: white;
+      background: rgba(20, 50, 80, 0.35);
+      backdrop-filter: blur(8px);
       border-radius: 32px;
-      padding: 1.8rem 1.5rem 1.8rem 1.5rem;
-      box-shadow: 0 10px 20px -8px rgba(0,20,40,0.12);
-      border: 1px solid rgba(255,255,255,0.7);
-      transition: all 0.2s ease;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 12px 28px -10px rgba(0,0,0,0.5);
+      border: 1px solid rgba(64, 164, 255, 0.15);
+      transition: all 0.3s ease;
       cursor: pointer;
       text-align: center;
-      backdrop-filter: blur(4px);
-      background: rgba(255,255,255,0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-cabo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(145deg, rgba(64, 164, 255, 0.05), transparent 60%);
+      pointer-events: none;
     }
 
     .card-cabo:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 30px -12px rgba(0, 40, 80, 0.25);
-      background: white;
-      border-color: #b4cee8;
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(64, 164, 255, 0.5);
+      box-shadow: 0 20px 40px -12px rgba(0, 80, 200, 0.4);
+      background: rgba(25, 60, 100, 0.5);
     }
 
     .card-cabo i {
-      font-size: 2.8rem;
-      color: #145a8a;
-      background: #e2edf9;
-      padding: 18px;
+      font-size: 3rem;
+      color: #7fc2ff;
+      background: rgba(30, 100, 180, 0.25);
+      padding: 20px;
       border-radius: 60px;
       margin-bottom: 1.2rem;
       display: inline-block;
+      border: 1px solid rgba(64, 164, 255, 0.20);
+      transition: 0.3s;
+    }
+
+    .card-cabo:hover i {
+      background: rgba(50, 140, 230, 0.35);
+      box-shadow: 0 0 30px rgba(64, 164, 255, 0.2);
     }
 
     .card-cabo h3 {
       font-weight: 700;
-      font-size: 1.5rem;
-      color: #0b2e48;
-      margin-bottom: 0.5rem;
+      font-size: 1.6rem;
+      color: #e2f0ff;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.3px;
     }
 
-    .card-cabo p {
-      color: #1f4d6e;
+    .card-cabo .sub-cabo {
+      color: #8ab7e6;
       font-weight: 400;
-      font-size: 0.95rem;
-      line-height: 1.4;
-      background: rgba(200, 220, 240, 0.2);
-      padding: 0.6rem 0.8rem;
+      font-size: 0.9rem;
+      background: rgba(64, 164, 255, 0.10);
+      padding: 0.4rem 1rem;
       border-radius: 40px;
       display: inline-block;
-      margin-top: 0.4rem;
+      border: 1px solid rgba(64, 164, 255, 0.08);
     }
 
+    .card-cabo .badge-protocolo {
+      display: inline-block;
+      margin-top: 0.8rem;
+      background: rgba(0, 180, 200, 0.15);
+      color: #7fc2ff;
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(64, 164, 255, 0.15);
+    }
+
+    /* Explicação detalhada do cabo */
     .explicacao-cabo {
-      margin-top: 2rem;
-      padding: 1.8rem 2rem;
-      background: rgba(10, 50, 85, 0.04);
+      margin-top: 2.5rem;
+      padding: 2rem 2.2rem;
+      background: rgba(12, 35, 60, 0.60);
+      backdrop-filter: blur(8px);
       border-radius: 28px;
-      border-left: 6px solid #1f6b9e;
-      backdrop-filter: blur(4px);
-      background: rgba(255,255,255,0.5);
-      border: 1px solid rgba(255,255,255,0.6);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border-left: 6px solid #4da0e8;
+      border: 1px solid rgba(64, 164, 255, 0.20);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
 
     .explicacao-cabo h4 {
-      font-weight: 600;
-      color: #0a2f4a;
-      font-size: 1.3rem;
+      font-weight: 700;
+      color: #c7e2ff;
+      font-size: 1.5rem;
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 0.5rem;
+      gap: 14px;
+      margin-bottom: 0.6rem;
     }
 
     .explicacao-cabo h4 i {
-      color: #1a6b9e;
+      color: #7fc2ff;
+      font-size: 1.8rem;
     }
 
     .explicacao-cabo p {
       font-size: 1.05rem;
-      color: #1e405b;
-      line-height: 1.6;
-      margin-bottom: 0.2rem;
+      color: #c0d9f0;
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
     }
 
-    .explicacao-cabo .tag-local {
-      display: inline-block;
-      background: #1a5f88;
-      color: white;
-      padding: 0.2rem 1.4rem;
+    .explicacao-cabo .detalhes-tecnicos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1.2rem 0 0.6rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(64, 164, 255, 0.10);
+    }
+
+    .explicacao-cabo .detalhes-tecnicos span {
+      background: rgba(20, 60, 100, 0.3);
+      padding: 0.4rem 1.2rem;
       border-radius: 60px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-top: 0.6rem;
+      font-size: 0.9rem;
+      color: #b0d2f2;
+      border: 1px solid rgba(64, 164, 255, 0.08);
     }
 
-    /* Topologias */
+    .explicacao-cabo .detalhes-tecnicos i {
+      margin-right: 8px;
+      color: #7fc2ff;
+    }
+
+    .tag-local {
+      display: inline-block;
+      background: linear-gradient(145deg, #1a5f88, #0f3f5e);
+      color: white;
+      padding: 0.3rem 1.8rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-top: 0.6rem;
+      border: 1px solid rgba(64, 164, 255, 0.20);
+    }
+
+    /* Topologias - botões */
     .topologia-botoes {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.2rem;
-      margin: 1rem 0 2rem 0;
+      gap: 1.4rem;
+      margin: 0.8rem 0 2.2rem 0;
     }
 
     .btn-topologia {
-      background: white;
-      border: 1px solid #cbdae8;
-      padding: 0.9rem 2.2rem;
+      background: rgba(20, 50, 80, 0.30);
+      border: 1px solid rgba(64, 164, 255, 0.15);
+      padding: 0.9rem 2.4rem;
       border-radius: 80px;
       font-weight: 600;
       font-size: 1.05rem;
-      color: #1b4b6e;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-      transition: 0.2s;
+      color: #aac6e6;
+      transition: 0.25s ease;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,0.6);
+      gap: 14px;
       backdrop-filter: blur(4px);
     }
 
     .btn-topologia i {
-      color: #1f6390;
+      color: #6ca6d4;
       font-size: 1.3rem;
     }
 
     .btn-topologia:hover {
-      background: #e2eefa;
-      border-color: #87b2d4;
+      background: rgba(40, 100, 170, 0.25);
+      border-color: rgba(64, 164, 255, 0.4);
+      color: #e2f0ff;
       transform: scale(1.02);
-      box-shadow: 0 8px 16px -8px rgba(0, 60, 120, 0.2);
     }
 
     .btn-topologia.active-topo {
-      background: #0a3b5e;
-      border-color: #0a3b5e;
+      background: linear-gradient(145deg, rgba(30, 100, 180, 0.35), rgba(10, 50, 100, 0.30));
+      border-color: #4da0e8;
       color: white;
+      box-shadow: 0 0 30px rgba(64, 164, 255, 0.15);
     }
 
     .btn-topologia.active-topo i {
-      color: white;
+      color: #7fc2ff;
     }
 
+    /* Detalhe topologia */
     .detalhe-topologia {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(6px);
+      background: rgba(12, 35, 60, 0.55);
+      backdrop-filter: blur(10px);
       border-radius: 32px;
-      padding: 2rem 2.2rem;
-      border: 1px solid rgba(255,255,255,0.8);
-      box-shadow: 0 8px 20px -10px rgba(0,20,40,0.08);
+      padding: 2.2rem 2.5rem;
+      border: 1px solid rgba(64, 164, 255, 0.15);
+      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.4);
       margin-top: 0.5rem;
     }
 
     .detalhe-topologia h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #08304a;
-      margin-bottom: 0.6rem;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #d6ebff;
+      margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .detalhe-topologia h3 i {
-      color: #1a6b9e;
+      color: #7fc2ff;
     }
 
     .descricao-topo {
-      font-size: 1.08rem;
-      color: #1e405b;
-      background: #eaf1fa;
-      padding: 0.8rem 1.6rem;
+      font-size: 1.1rem;
+      color: #b0d2f2;
+      background: rgba(30, 80, 140, 0.20);
+      padding: 0.7rem 1.8rem;
       border-radius: 60px;
       display: inline-block;
-      margin: 0.5rem 0 1.5rem 0;
+      margin: 0.3rem 0 1.8rem 0;
       font-weight: 500;
+      border: 1px solid rgba(64, 164, 255, 0.08);
     }
 
     .lista-vantagens {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
-      margin-top: 1.4rem;
+      margin-top: 1.2rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .lista-vantagens {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
+        gap: 1.4rem;
       }
     }
 
     .lista-vantagens div {
-      background: rgba(245, 250, 255, 0.6);
-      padding: 1.2rem 1.6rem;
+      background: rgba(10, 30, 55, 0.40);
+      backdrop-filter: blur(4px);
+      padding: 1.4rem 1.8rem;
       border-radius: 24px;
-      border: 1px solid rgba(200, 215, 235, 0.4);
+      border: 1px solid rgba(64, 164, 255, 0.08);
     }
 
     .lista-vantagens h4 {
-      font-weight: 600;
-      color: #0d3855;
+      font-weight: 700;
+      color: #c7e2ff;
       font-size: 1.1rem;
       margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .lista-vantagens ul {
@@ -363,54 +428,66 @@
     }
 
     .lista-vantagens li {
-      padding: 0.3rem 0;
-      color: #1c405b;
+      padding: 0.4rem 0;
+      color: #b0cfe8;
       display: flex;
       align-items: baseline;
-      gap: 10px;
+      gap: 12px;
       font-size: 0.98rem;
+      line-height: 1.5;
     }
 
     .lista-vantagens li i {
-      width: 18px;
-      color: #1a6b9e;
+      width: 20px;
+      color: #7fc2ff;
       font-size: 0.9rem;
     }
 
     .badge-vantagem {
-      background: #e2f0e6;
-      color: #135d3a;
-      padding: 0.2rem 1rem;
+      background: rgba(0, 200, 150, 0.15);
+      color: #7fe0c0;
+      padding: 0.2rem 1.2rem;
       border-radius: 60px;
       font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-left: 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+      border: 1px solid rgba(0, 200, 150, 0.15);
     }
 
     .badge-desvantagem {
-      background: #fce9e9;
-      color: #a53f3f;
-      padding: 0.2rem 1rem;
+      background: rgba(220, 80, 80, 0.15);
+      color: #f0a0a0;
+      padding: 0.2rem 1.2rem;
       border-radius: 60px;
       font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-left: 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+      border: 1px solid rgba(220, 80, 80, 0.15);
     }
 
     .footer-guia {
-      margin-top: 3rem;
+      margin-top: 3.5rem;
       text-align: center;
       font-size: 0.85rem;
-      color: #456f8f;
-      border-top: 1px solid rgba(0,0,0,0.03);
-      padding-top: 1.5rem;
-      letter-spacing: 0.2px;
+      color: #4f7fa8;
+      border-top: 1px solid rgba(64, 164, 255, 0.08);
+      padding-top: 1.8rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
     }
 
-    /* Ajustes para mobile */
-    @media (max-width: 700px) {
+    .footer-guia i {
+      margin-right: 6px;
+      color: #4f8fc0;
+    }
+
+    /* Responsividade */
+    @media (max-width: 750px) {
       .card-principal {
         padding: 1.8rem 1.2rem;
         border-radius: 32px;
@@ -420,10 +497,11 @@
       }
       .header i {
         font-size: 2rem;
+        padding: 12px;
       }
       .aba-btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
       }
       .grid-cards {
         gap: 1.2rem;
@@ -453,27 +531,33 @@
       <div class="card-cabo" data-cabo="trancado">
         <i class="fas fa-arrows-spin"></i>
         <h3>Par Trançado</h3>
-        <p><i class="fas fa-industry"></i> Ethernet industrial</p>
+        <div class="sub-cabo"><i class="fas fa-cable"></i> Ethernet Industrial</div>
+        <div class="badge-protocolo"><i class="fas fa-code"></i> PROFINET · EtherNet/IP</div>
       </div>
       <!-- fibra óptica -->
       <div class="card-cabo" data-cabo="fibra">
         <i class="fas fa-fiber"></i>
         <h3>Fibra Óptica</h3>
-        <p><i class="fas fa-bolt"></i> Alta velocidade</p>
+        <div class="sub-cabo"><i class="fas fa-bolt"></i> Alta Velocidade</div>
+        <div class="badge-protocolo"><i class="fas fa-code"></i> 1 Gbps · 10 Gbps</div>
       </div>
       <!-- wireless -->
       <div class="card-cabo" data-cabo="wireless">
         <i class="fas fa-wifi"></i>
         <h3>Wireless</h3>
-        <p><i class="fas fa-robot"></i> Mobilidade</p>
+        <div class="sub-cabo"><i class="fas fa-robot"></i> Mobilidade</div>
+        <div class="badge-protocolo"><i class="fas fa-code"></i> Wi-Fi 6 · 5G Industrial</div>
       </div>
     </div>
 
     <!-- área de explicação dinâmica -->
     <div id="explicacao-cabo" class="explicacao-cabo">
-      <h4><i class="fas fa-circle-info"></i> Clique em um cabo para ver onde é usado</h4>
-      <p style="color: #2f5b7a;">Selecione um dos cabos acima para conhecer sua aplicação no chão de fábrica.</p>
-      <div class="tag-local">🏭 Indústria 4.0</div>
+      <h4><i class="fas fa-circle-info"></i> Clique em um cabo para explorar</h4>
+      <p style="color: #9abfdf;">Selecione um dos cabos acima para conhecer sua aplicação, vantagens e características técnicas no chão de fábrica.</p>
+      <div class="detalhes-tecnicos">
+        <span><i class="fas fa-arrow-right"></i> Clique em um card</span>
+        <span><i class="fas fa-microchip"></i> Indústria 4.0</span>
+      </div>
     </div>
   </div>
 
@@ -491,64 +575,84 @@
   </div>
 
   <div class="footer-guia">
-    <i class="fas fa-robot" style="margin-right: 8px;"></i> Automação industrial · redes robustas para o chão de fábrica
+    <span><i class="fas fa-robot"></i> Automação industrial · redes robustas</span>
+    <span><i class="fas fa-shield-alt"></i> Segurança e performance no chão de fábrica</span>
   </div>
 </div>
 
 <script>
   (function(){
-    // ----- DADOS DOS CABOS -----
+    // ----- DADOS DOS CABOS (enriquecidos) -----
     const cabosInfo = {
       trancado: {
         titulo: 'Par Trançado',
         icone: 'fa-arrows-spin',
-        explicacao: 'Usado em redes Ethernet industriais (PROFINET, EtherNet/IP) para conectar CLPs, I/O remoto e drives. É resistente a interferências e非常适合 em ambientes com ruído elétrico moderado.',
-        local: 'Painéis de controle, máquinas operatrizes, células de manufatura.'
+        explicacao: 'O cabo de par trançado é a espinha dorsal das redes Ethernet industriais. Utilizado em protocolos como PROFINET e EtherNet/IP, conecta CLPs, I/O remoto, drives e HMIs. Oferece boa resistência a ruídos eletromagnéticos graças ao trançamento dos pares.',
+        local: 'Painéis de controle, máquinas operatrizes, células de manufatura, redes de campo.',
+        detalhes: [
+          'Categorias: CAT5e, CAT6, CAT7 (blindado)',
+          'Distância máxima: 100 m (sem repetidor)',
+          'Blindagem: FTP, STP, SFTP'
+        ]
       },
       fibra: {
         titulo: 'Fibra Óptica',
         icone: 'fa-fiber',
-        explicacao: 'Empregada em backbones de alta velocidade, interligação de armários elétricos e comunicação entre prédios. Imune a interferências eletromagnéticas, ideal para ambientes com alta tensão e grandes distâncias.',
-        local: 'Backbone de fábrica, subestações, áreas com fornos e motores de alta potência.'
+        explicacao: 'A fibra óptica é a escolha para backbones de alta velocidade e longas distâncias. Imune a interferências eletromagnéticas, é ideal para ambientes com alta tensão, fornos e motores de grande porte. Suporta velocidades de 1 Gbps a 10 Gbps e além.',
+        local: 'Backbone de fábrica, subestações, interligação de prédios, áreas com forte ruído.',
+        detalhes: [
+          'Multimodo (OM3, OM4) e Monomodo (OS2)',
+          'Distância: até 40 km (monomodo)',
+          'Conectores: SC, LC, ST'
+        ]
       },
       wireless: {
         titulo: 'Wireless (Wi-Fi/5G)',
         icone: 'fa-wifi',
-        explicacao: 'Utilizado em AGVs (veículos guiados), robôs móveis, sensores sem fio e pontos de difícil acesso. Permite mobilidade e flexibilidade na linha de produção, com redes dedicadas (Wi-Fi 6/5G industrial).',
-        local: 'Armazéns, estações de montagem móveis, inspeção remota.'
+        explicacao: 'Tecnologia sem fio para AGVs, robôs móveis, sensores IoT e pontos de difícil acesso. O Wi-Fi 6 industrial e o 5G oferecem baixa latência e alta densidade de dispositivos. Perfeito para ambientes com mobilidade e necessidade de flexibilidade.',
+        local: 'Armazéns automatizados, estações móveis, inspeção remota, veículos guiados.',
+        detalhes: [
+          'Padrões: Wi-Fi 5/6, 5G NR',
+          'Latência: < 10 ms (5G URLLC)',
+          'Segurança: WPA3, certificados 802.1X'
+        ]
       }
     };
 
-    // ----- DADOS TOPOLOGIAS -----
+    // ----- DADOS TOPOLOGIAS (enriquecidos) -----
     const topologiasInfo = {
       estrela: {
         titulo: 'Layout em Estrela',
         icone: 'fa-star',
-        descricao: 'Cada dispositivo se conecta a um switch central (hub). A comunicação passa pelo ponto central, que gerencia o tráfego.',
+        descricao: 'Cada dispositivo (nó) se conecta a um switch central ou hub. A comunicação é gerenciada pelo ponto central, que encaminha os dados para o destino correto. É a topologia mais comum em redes industriais modernas.',
         vantagens: [
           'Alta confiabilidade: falha em um cabo afeta apenas o dispositivo conectado.',
           'Facilidade de expansão: adicionar novos nós é simples (basta conectar ao switch).',
-          'Diagnóstico rápido: isolamento de falhas é direto.'
+          'Diagnóstico rápido: isolamento de falhas é direto com LEDs de porta.',
+          'Desempenho previsível: cada porta tem largura de banda dedicada.'
         ],
         desvantagens: [
           'Ponto único de falha: se o switch central falhar, toda a rede para.',
-          'Maior custo: necessidade de switch e mais cabeamento.',
-          'Dependência de energia: switch exige alimentação estável.'
+          'Maior custo: necessidade de switch gerenciável e mais cabeamento.',
+          'Dependência de energia: switch exige alimentação estável (UPS recomendado).',
+          'Espaço físico: switch central requer rack ou armário.'
         ]
       },
       barramento: {
         titulo: 'Layout em Barramento',
         icone: 'fa-grip-lines',
-        descricao: 'Todos os dispositivos compartilham um único meio de comunicação (cabo backbone). Os dados trafegam em série e cada nó recebe todas as mensagens, filtrando as que lhe interessam.',
+        descricao: 'Todos os dispositivos compartilham um único meio de comunicação (cabo backbone ou bus). Os dados trafegam em série e cada nó recebe todas as mensagens, filtrando as que lhe interessam (endereço MAC ou IP).',
         vantagens: [
           'Baixo custo: menos cabos e sem equipamentos ativos centrais.',
           'Simplicidade: fácil de instalar em linhas retas (esteiras, transportadores).',
-          'Ideal para redes pequenas com poucos dispositivos.'
+          'Ideal para redes pequenas com poucos dispositivos (até 30 nós).',
+          'Menos pontos de falha (sem switch).'
         ],
         desvantagens: [
           'Baixa tolerância a falhas: uma quebra no cabo pode derrubar toda a rede.',
           'Dificuldade de expansão: adicionar nós exige interrupção e pode degradar desempenho.',
-          'Colisões e tráfego: em redes ocupadas, o desempenho cai significativamente.'
+          'Colisões e tráfego: em redes ocupadas, o desempenho cai significativamente.',
+          'Comprimento limitado: depende do meio físico (ex: RS-485 até 1200 m).'
         ]
       }
     };
@@ -559,20 +663,22 @@
     const botoesTopo = document.querySelectorAll('.btn-topologia');
     const detalheTopo = document.getElementById('detalhe-topologia');
 
-    // ----- FUNÇÃO PARA ATUALIZAR EXPLICAÇÃO DO CABO -----
+    // ----- FUNÇÃO PARA ATUALIZAR EXPLICAÇÃO DO CABO (com mais detalhes) -----
     function mostrarExplicacaoCabo(caboKey) {
       const info = cabosInfo[caboKey];
       if (!info) return;
+      
+      let detalhesHtml = info.detalhes.map(d => `<span><i class="fas fa-cog"></i> ${d}</span>`).join('');
+
       explicacaoDiv.innerHTML = `
         <h4><i class="fas ${info.icone}"></i> ${info.titulo}</h4>
         <p>${info.explicacao}</p>
-        <div style="margin-top: 0.8rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <span style="background: #1a5f88; color: white; padding: 0.2rem 1.2rem; border-radius: 60px; font-weight: 500; font-size:0.9rem;">
-            <i class="fas fa-map-pin"></i> ${info.local}
-          </span>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.8rem;">
+          <span class="tag-local"><i class="fas fa-map-pin"></i> ${info.local}</span>
         </div>
-        <div class="tag-local" style="background: #0a3b5e; color:white; margin-top:0.8rem;">
-          <i class="fas fa-arrow-right"></i> Aplicação direta no chão de fábrica
+        <div class="detalhes-tecnicos">
+          ${detalhesHtml}
+          <span><i class="fas fa-industry"></i> Aplicação industrial</span>
         </div>
       `;
     }
@@ -582,9 +688,9 @@
       card.addEventListener('click', function() {
         const cabo = this.dataset.cabo;
         mostrarExplicacaoCabo(cabo);
-        // destaque visual (opcional)
-        cardsCabos.forEach(c => c.style.background = 'rgba(255,255,255,0.75)');
-        this.style.background = 'white';
+        cardsCabos.forEach(c => c.style.background = 'rgba(20, 50, 80, 0.35)');
+        this.style.background = 'rgba(30, 80, 140, 0.50)';
+        this.style.borderColor = 'rgba(64, 164, 255, 0.6)';
       });
     });
 
@@ -592,37 +698,39 @@
     setTimeout(() => {
       const primeiroCabo = document.querySelector('.card-cabo[data-cabo="trancado"]');
       if (primeiroCabo) {
-        primeiroCabo.style.background = 'white';
+        primeiroCabo.style.background = 'rgba(30, 80, 140, 0.50)';
+        primeiroCabo.style.borderColor = 'rgba(64, 164, 255, 0.6)';
         mostrarExplicacaoCabo('trancado');
       }
     }, 50);
 
-    // ----- FUNÇÃO PARA ATUALIZAR DETALHE TOPOLOGIA -----
+    // ----- FUNÇÃO PARA ATUALIZAR DETALHE TOPOLOGIA (com mais info) -----
     function mostrarTopologia(topoKey) {
       const info = topologiasInfo[topoKey];
       if (!info) return;
 
-      // vantagens
-      let vantagensHtml = info.vantagens.map(v => `<li><i class="fas fa-check-circle" style="color:#1f8b4c;"></i> ${v}</li>`).join('');
-      let desvantagensHtml = info.desvantagens.map(d => `<li><i class="fas fa-circle-exclamation" style="color:#b13e3e;"></i> ${d}</li>`).join('');
+      let vantagensHtml = info.vantagens.map(v => `<li><i class="fas fa-check-circle" style="color:#5bc0a0;"></i> ${v}</li>`).join('');
+      let desvantagensHtml = info.desvantagens.map(d => `<li><i class="fas fa-circle-exclamation" style="color:#e08080;"></i> ${d}</li>`).join('');
 
       detalheTopo.innerHTML = `
         <h3><i class="fas ${info.icone}"></i> ${info.titulo}</h3>
-        <div class="descricao-topo"><i class="fas fa-arrow-right" style="margin-right: 8px;"></i> ${info.descricao}</div>
+        <div class="descricao-topo"><i class="fas fa-arrow-right" style="margin-right: 10px;"></i> ${info.descricao}</div>
 
         <div class="lista-vantagens">
           <div>
-            <h4><i class="fas fa-thumbs-up" style="color:#1a7a44;"></i> Vantagens <span class="badge-vantagem">+</span></h4>
+            <h4><i class="fas fa-thumbs-up" style="color:#5bc0a0;"></i> Vantagens <span class="badge-vantagem">+</span></h4>
             <ul>${vantagensHtml}</ul>
           </div>
           <div>
-            <h4><i class="fas fa-thumbs-down" style="color:#ac3a3a;"></i> Desvantagens <span class="badge-desvantagem">−</span></h4>
+            <h4><i class="fas fa-thumbs-down" style="color:#e08080;"></i> Desvantagens <span class="badge-desvantagem">−</span></h4>
             <ul>${desvantagensHtml}</ul>
           </div>
         </div>
-        <div style="margin-top: 1.6rem; padding: 0.8rem 0 0.2rem 0; border-top: 1px solid rgba(0,0,0,0.04); font-size:0.9rem; color:#2f5a78;">
-          <i class="fas fa-industry"></i> Aplicação típica no chão de fábrica: 
-          ${topoKey === 'estrela' ? 'células robotizadas, ilhas de automação com CLPs e I/O distribuído.' : 'linhas de transporte, redes de sensores simples, esteiras modulares.'}
+        <div style="margin-top: 1.8rem; padding: 0.8rem 0 0.2rem 0; border-top: 1px solid rgba(64, 164, 255, 0.08); display: flex; gap: 2rem; flex-wrap: wrap; font-size:0.9rem; color:#8ab7e6;">
+          <span><i class="fas fa-industry"></i> Aplicação típica: 
+            ${topoKey === 'estrela' ? 'células robotizadas, ilhas de automação com CLPs e I/O distribuído.' : 'linhas de transporte, redes de sensores simples, esteiras modulares.'}
+          </span>
+          <span><i class="fas fa-microchip"></i> Escalabilidade: ${topoKey === 'estrela' ? 'Alta (até 48 portas por switch)' : 'Baixa (até 30 nós)'}</span>
         </div>
       `;
     }
@@ -631,7 +739,6 @@
     botoesTopo.forEach(btn => {
       btn.addEventListener('click', function() {
         const topo = this.dataset.topo;
-        // remove active de todos
         botoesTopo.forEach(b => b.classList.remove('active-topo'));
         this.classList.add('active-topo');
         mostrarTopologia(topo);
@@ -655,11 +762,8 @@
     botoesAba.forEach(btn => {
       btn.addEventListener('click', function() {
         const aba = this.dataset.aba;
-        // troca active nos botões
         botoesAba.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-
-        // mostra conteúdo
         Object.keys(conteudos).forEach(key => {
           conteudos[key].classList.toggle('active', key === aba);
         });

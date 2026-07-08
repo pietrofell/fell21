@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InovaNet Automação - Guia Visual</title>
+    <title>NetFactory - Guia de Redes Industriais</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-100 font-sans text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
 
-    <header class="bg-slate-900 text-white py-6 px-4 shadow-md text-center">
-        <h1 class="text-3xl font-extrabold tracking-wide text-cyan-400">InovaNet</h1>
-        <p class="text-sm text-slate-400 mt-1">Guia Visual de Redes para Automação Industrial</p>
+    <header class="bg-slate-950 border-b border-slate-800 py-6 text-center shadow-lg">
+        <h1 class="text-3xl font-black tracking-wider text-blue-500 uppercase">NetFactory</h1>
+        <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Guia Visual de Redes para Automação</p>
     </header>
 
     <nav class="max-w-4xl mx-auto w-full mt-8 px-4">
-        <div class="flex border-b border-slate-300 gap-2">
-            <button id="btn-cabos" onclick="mudarAba('cabos')" class="py-3 px-6 font-semibold text-lg transition-all duration-200 border-b-4 border-cyan-600 text-cyan-600 focus:outline-none">
+        <div class="flex border-b border-slate-700 gap-4">
+            <button id="btn-cabos" onclick="trocarAba('cabos')" class="py-3 px-6 font-bold text-base border-b-4 border-blue-500 text-blue-500 transition-all duration-200 focus:outline-none">
                 Cabos Industriais
             </button>
-            <button id="btn-topologias" onclick="mudarAba('topologias')" class="py-3 px-6 font-semibold text-lg text-slate-500 hover:text-slate-800 transition-all duration-200 border-b-4 border-transparent focus:outline-none">
+            <button id="btn-topologias" onclick="trocarAba('topologias')" class="py-3 px-6 font-bold text-base border-b-4 border-transparent text-slate-400 hover:text-slate-200 transition-all duration-200 focus:outline-none">
                 Topologias
             </button>
         </div>
@@ -26,31 +26,56 @@
 
     <main class="max-w-4xl mx-auto w-full flex-grow p-4 mt-4">
         
-        <section id="aba-cabos" class="block space-y-6">
-            <p class="text-slate-600 italic">Clique em um dos cards abaixo para descobrir onde ele é essencial no chão de fábrica:</p>
+        <section id="aba-cabos" class="space-y-6">
+            <p class="text-slate-400 text-sm italic">Clique em um dos cards abaixo para ver a aplicação no chão de fábrica:</p>
             
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div onclick="exibirCabo('par-trancado')" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-cyan-500 hover:shadow-md cursor-pointer transition-all text-center group">
-                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">🔌</div>
-                    <h3 class="text-lg font-bold text-slate-700">Par Trançado</h3>
-                    <p class="text-xs text-slate-400 mt-1">O padrão das redes Ethernet</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div onclick="mostrarCabo('par-trancado')" class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500 hover:bg-slate-750 cursor-pointer transition-all text-center group shadow-md">
+                    <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">🔌</div>
+                    <h3 class="text-lg font-bold text-slate-200">Par Trançado</h3>
+                    <p class="text-xs text-slate-500 mt-1">Redes Ethernet comuns</p>
                 </div>
 
-                <div onclick="exibirCabo('fibra')" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-cyan-500 hover:shadow-md cursor-pointer transition-all text-center group">
-                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">✨</div>
-                    <h3 class="text-lg font-bold text-slate-700">Fibra Óptica</h3>
-                    <p class="text-xs text-slate-400 mt-1">Velocidade da luz e imunidade</p>
+                <div onclick="mostrarCabo('fibra')" class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500 hover:bg-slate-750 cursor-pointer transition-all text-center group shadow-md">
+                    <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">⚡</div>
+                    <h3 class="text-lg font-bold text-slate-200">Fibra Óptica</h3>
+                    <p class="text-xs text-slate-500 mt-1">Altas distâncias e imunidade</p>
                 </div>
 
-                <div onclick="exibirCabo('wireless')" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-cyan-500 hover:shadow-md cursor-pointer transition-all text-center group">
-                    <div class="text-4xl mb-3 group-hover:scale-110 transition-transform">📡</div>
-                    <h3 class="text-lg font-bold text-slate-700">Wireless</h3>
-                    <p class="text-xs text-slate-400 mt-1">Conectividade sem amarras</p>
+                <div onclick="mostrarCabo('wireless')" class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-blue-500 hover:bg-slate-750 cursor-pointer transition-all text-center group shadow-md">
+                    <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">📡</div>
+                    <h3 class="text-lg font-bold text-slate-200">Wireless</h3>
+                    <p class="text-xs text-slate-500 mt-1">Conexões sem fio</p>
                 </div>
             </div>
 
-            <div id="painel-cabo" class="bg-cyan-50 border border-cyan-200 rounded-xl p-6 hidden transition-all">
-                <h4 id="titulo-cabo" class="text-xl font-bold text-cyan-900 mb-2"></h4>
-                <p id="texto-cabo" class="text-slate-700 leading-relaxed"></p>
+            <div id="painel-cabo" class="bg-blue-950/40 border border-blue-900 rounded-xl p-6 hidden">
+                <h4 id="titulo-cabo" class="text-xl font-bold text-blue-400 mb-2"></h4>
+                <p id="texto-cabo" class="text-slate-300 text-sm leading-relaxed"></p>
             </div>
         </section>
+
+        <section id="aba-topologias" class="space-y-6 hidden">
+            <p class="text-slate-400 text-sm italic">Selecione uma topologia para ver os detalhes, vantagens e desvantagens:</p>
+            
+            <div class="flex flex-wrap gap-4">
+                <button onclick="mostrarTopologia('estrela')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all focus:outline-none">
+                    ⭐ Layout em Estrela
+                </button>
+                <button onclick="mostrarTopologia('barramento')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all focus:outline-none">
+                    🚌 Layout em Barramento
+                </button>
+            </div>
+
+            <div id="painel-topologia" class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-lg hidden">
+                <h3 id="titulo-topo" class="text-2xl font-bold text-slate-100 border-b border-slate-700 pb-3 mb-4"></h3>
+                
+                <div class="mb-6">
+                    <h4 class="font-bold text-blue-400 text-xs uppercase tracking-wider mb-1">Onde é usado / Funcionamento</h4>
+                    <p id="desc-topo" class="text-slate-300 text-sm leading-relaxed"></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-emerald-950/30 border border-emerald-900 p-4 rounded-lg">
+                        <h4 class="font-bold text-emerald-400 flex items-center gap-2 mb-2 text-sm">✅ Vantagens no Chão de Fábrica</h4>
+                        <ul id="

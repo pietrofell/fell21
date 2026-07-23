@@ -4,252 +4,359 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Central de Iluminação IoT - 3 LEDs</title>
-  <!-- Paho MQTT via CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-  <!-- Tailwind via CDN (para agilidade, com customizações) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Glassmorphism + refinamentos */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
-      background: linear-gradient(145deg, #d4e9ff 0%, #f0f8ff 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(145deg, #e8f4fd 0%, #f5faff 50%, #e8f4fd 100%);
       min-height: 100vh;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 1.5rem;
       margin: 0;
     }
+    
     .glass-card {
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(14px) saturate(180%);
-      -webkit-backdrop-filter: blur(14px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25);
-      transition: box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 30px 60px -20px rgba(0, 40, 80, 0.15), 
+                  inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      transition: box-shadow 0.4s ease;
     }
+    
     .glass-card:hover {
-      box-shadow: 0 30px 50px -16px rgba(0, 40, 80, 0.3);
+      box-shadow: 0 40px 80px -20px rgba(0, 40, 80, 0.25),
+                  inset 0 1px 2px rgba(255, 255, 255, 0.8);
     }
-    /* LED virtual com transições suaves */
+    
     .led-circle {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: #b0c7db;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
-      transition: background 0.3s ease, box-shadow 0.4s ease, transform 0.2s ease;
+      background: #c8d8e8;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.06);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 400;
-      letter-spacing: 0.3px;
-      color: #2f4057;
+      letter-spacing: 0.2px;
+      color: #4a6a8a;
       font-size: 0.7rem;
       margin: 0 auto;
-      will-change: transform;
+      position: relative;
     }
+    
     .led-on {
       background: #0a8cff;
-      box-shadow: 0 0 30px #3b9eff, 0 0 60px #6eb5ff, 0 0 90px #a0d0ff;
+      box-shadow: 0 0 40px rgba(10, 140, 255, 0.4),
+                  0 0 80px rgba(10, 140, 255, 0.2),
+                  inset 0 2px 4px rgba(255, 255, 255, 0.3);
       color: white;
-      text-shadow: 0 0 8px rgba(255,255,255,0.6);
-      animation: pulse-glow 2s infinite alternate;
+      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+      animation: pulse-glow 2.5s ease-in-out infinite;
     }
+    
     @keyframes pulse-glow {
-      0% { box-shadow: 0 0 18px #3b9eff, 0 0 40px #6eb5ff; }
-      100% { box-shadow: 0 0 40px #6eb5ff, 0 0 80px #a0d0ff, 0 0 120px #c0e4ff; }
+      0%, 100% { 
+        box-shadow: 0 0 30px rgba(10, 140, 255, 0.4),
+                    0 0 60px rgba(10, 140, 255, 0.2),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+      }
+      50% { 
+        box-shadow: 0 0 50px rgba(10, 140, 255, 0.6),
+                    0 0 100px rgba(10, 140, 255, 0.3),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      }
     }
+    
     .led-off {
-      background: #bdd3e6;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.08);
-      color: #3a4d66;
+      background: #c8d8e8;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.06);
+      color: #4a6a8a;
     }
-    /* Status pill com luz pulsante */
+    
     .status-pill {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 0.45rem 1.2rem 0.45rem 1rem;
-      border-radius: 40px;
-      background: rgba(255,255,255,0.3);
-      backdrop-filter: blur(4px);
+      padding: 0.5rem 1.4rem 0.5rem 1.2rem;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.5);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 500;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
     }
+    
     .status-dot {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       display: inline-block;
-      transition: background 0.3s, box-shadow 0.3s;
+      transition: all 0.4s ease;
     }
+    
     .dot-waiting {
       background: #fbbf24;
-      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
-      animation: pulse-dot 1.4s infinite;
+      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6);
+      animation: pulse-dot 1.6s ease-in-out infinite;
     }
+    
     .dot-online {
       background: #10b981;
-      box-shadow: 0 0 12px #34d399;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
     }
+    
     .dot-offline {
       background: #ef4444;
-      box-shadow: 0 0 12px #f87171;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
     }
+    
     @keyframes pulse-dot {
-      0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); }
-      70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+      0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5);
+        transform: scale(1);
+      }
+      50% { 
+        box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+        transform: scale(0.9);
+      }
     }
-    /* inputs e botões refinados */
+    
     .topic-input {
       background: rgba(255,255,255,0.5);
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 40px;
-      padding: 0.6rem 1.4rem;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      border-radius: 100px;
+      padding: 0.65rem 1.5rem;
       width: 100%;
-      font-size: 0.95rem;
-      transition: all 0.2s;
-      color: #1e293b;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      color: #1a2a3a;
+      font-family: 'Inter', monospace;
+      letter-spacing: 0.3px;
     }
+    
     .topic-input:focus {
       outline: none;
-      border-color: #94b8ff;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+      border-color: #6ea8fe;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
       background: rgba(255,255,255,0.7);
     }
+    
+    .topic-input::placeholder {
+      color: #8aa3c0;
+      font-weight: 300;
+    }
+    
     .btn-action {
-      padding: 0.6rem 1.2rem;
-      border-radius: 48px;
+      padding: 0.7rem 1.8rem;
+      border-radius: 100px;
       font-weight: 500;
+      font-size: 0.85rem;
       letter-spacing: 0.3px;
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       border: none;
-      background: #e2e8f0;
-      color: #1e293b;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      background: #e8edf5;
+      color: #2a3a4a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
       flex: 1;
-      min-width: 80px;
+      min-width: 90px;
       text-align: center;
       cursor: pointer;
-      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
     }
+    
     .btn-action:active {
-      transform: scale(0.95);
+      transform: scale(0.94);
     }
+    
     .btn-action:disabled {
-      opacity: 0.4;
+      opacity: 0.35;
       pointer-events: none;
       filter: grayscale(0.3);
     }
+    
     .btn-on {
-      background: #0b9e6e;
+      background: linear-gradient(135deg, #0b9e6e, #0a8a5f);
       color: white;
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
+      box-shadow: 0 4px 16px rgba(11, 158, 110, 0.25);
     }
+    
     .btn-on:hover:not(:disabled) {
-      background: #0a8a5f;
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 6px 24px rgba(11, 158, 110, 0.35);
+      transform: translateY(-2px);
     }
+    
     .btn-off {
-      background: #d16b6b;
+      background: linear-gradient(135deg, #d16b6b, #bf5a5a);
       color: white;
-      box-shadow: 0 6px 16px rgba(209, 107, 107, 0.2);
+      box-shadow: 0 4px 16px rgba(209, 107, 107, 0.2);
     }
+    
     .btn-off:hover:not(:disabled) {
-      background: #bf5a5a;
-      box-shadow: 0 8px 20px rgba(209, 107, 107, 0.3);
+      box-shadow: 0 6px 24px rgba(209, 107, 107, 0.3);
+      transform: translateY(-2px);
     }
-    /* responsividade fina */
-    @media (max-width: 480px) {
-      .led-circle { width: 60px; height: 60px; font-size: 0.6rem; }
-      .btn-action { padding: 0.5rem 0.8rem; min-width: 70px; font-size: 0.75rem; }
+    
+    .btn-all-on {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
+    }
+    
+    .btn-all-on:hover:not(:disabled) {
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.35);
+      transform: translateY(-2px);
+    }
+    
+    .btn-all-off {
+      background: linear-gradient(135deg, #8b8b8b, #6b6b6b);
+      color: white;
+      box-shadow: 0 4px 16px rgba(107, 107, 107, 0.2);
+    }
+    
+    .btn-all-off:hover:not(:disabled) {
+      box-shadow: 0 6px 24px rgba(107, 107, 107, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .led-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 1.5rem;
+      padding: 1.25rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .led-card:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.4);
+    }
+    
+    @media (max-width: 640px) {
+      .led-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 0.6rem;
+      }
+      .btn-action {
+        padding: 0.5rem 1rem;
+        min-width: 70px;
+        font-size: 0.75rem;
+      }
+      .glass-card {
+        padding: 1.5rem;
+      }
+    }
+    
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.1);
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-<div class="w-full max-w-3xl mx-auto px-3">
-  <!-- Glassmorphism card principal -->
+<div class="w-full max-w-4xl mx-auto px-3">
   <div class="glass-card rounded-3xl p-6 md:p-8 w-full">
     
-    <!-- Cabeçalho minimalista -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5">
+    <!-- Cabeçalho -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
       <div>
-        <h1 class="text-2xl md:text-3xl font-semibold text-[#0b2b44] tracking-tight flex items-center gap-2">
-          <span>💡</span> Central de Iluminação IoT
+        <h1 class="text-2xl md:text-3xl font-semibold text-[#0b2b44] tracking-tight flex items-center gap-3">
+          <span class="text-3xl">💡</span> 
+          Central de Iluminação IoT
         </h1>
-        <p class="text-sm text-[#3a5a7a] font-light tracking-wide mt-0.5 flex items-center gap-1">
-          <span class="opacity-70">⚡</span> Controle de Hardware – 3 LEDs
+        <p class="text-sm text-[#4a7a9a] font-light tracking-wide mt-0.5 flex items-center gap-2">
+          <span class="opacity-60">⚡</span> Controle de Hardware – 3 LEDs
         </p>
       </div>
-      <!-- Status Pill -->
       <div id="statusPill" class="status-pill self-start sm:self-center text-[#1f3a57]">
         <span id="statusDot" class="status-dot dot-waiting"></span>
         <span id="statusLabel" class="text-sm font-medium">Sincronizando...</span>
       </div>
     </div>
 
-    <!-- Tópico interativo (input) -->
+    <!-- Tópico -->
     <div class="mb-6">
-      <label for="topicInput" class="block text-xs font-medium text-[#2d4b6e] uppercase tracking-wider mb-1.5 ml-1 opacity-80">Tópico MQTT</label>
+      <label for="topicInput" class="block text-xs font-semibold text-[#3a5a7a] uppercase tracking-wider mb-1.5 ml-1 opacity-70">Tópico MQTT</label>
       <input id="topicInput" type="text" value="gerry_sanchez_led_exclusivo/arduino" 
-             class="topic-input text-[#1e293b] font-mono text-sm" spellcheck="false">
-      <p class="text-[10px] text-[#4a6a8a] mt-1.5 ml-2 opacity-70">✎ Edite e pressione Enter para reassinar automaticamente</p>
+             class="topic-input text-[#1a2a3a]" spellcheck="false">
+      <p class="text-[10px] text-[#5a7a9a] mt-1.5 ml-2 opacity-60 font-light">✎ Edite e pressione Enter para reassinar automaticamente</p>
     </div>
 
-    <!-- LEDs de controle (3 LEDs) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- 3 LEDs -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-6">
       <!-- LED 1 -->
-      <div class="flex flex-col items-center p-4 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30">
-        <div class="text-sm font-medium text-[#1f3a57] mb-2">LED 1</div>
+      <div class="led-card">
+        <div class="text-xs font-semibold text-[#2a4a6a] text-center uppercase tracking-wider mb-2 opacity-70">LED 1</div>
         <div id="ledCircle1" class="led-circle led-off">
-          <span id="ledLabel1" class="text-center px-1">Inativo</span>
+          <span id="ledLabel1" class="text-center px-1 leading-tight">Inativo</span>
         </div>
-        <div class="flex gap-2 mt-3 w-full">
-          <button id="btnOn1" class="btn-action btn-on" disabled>🔛 Ligar</button>
-          <button id="btnOff1" class="btn-action btn-off" disabled>⏻ Desl.</button>
+        <div class="flex gap-2 mt-3">
+          <button id="btnOn1" class="btn-action btn-on" disabled>Ligar</button>
+          <button id="btnOff1" class="btn-action btn-off" disabled>Desligar</button>
         </div>
       </div>
 
       <!-- LED 2 -->
-      <div class="flex flex-col items-center p-4 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30">
-        <div class="text-sm font-medium text-[#1f3a57] mb-2">LED 2</div>
+      <div class="led-card">
+        <div class="text-xs font-semibold text-[#2a4a6a] text-center uppercase tracking-wider mb-2 opacity-70">LED 2</div>
         <div id="ledCircle2" class="led-circle led-off">
-          <span id="ledLabel2" class="text-center px-1">Inativo</span>
+          <span id="ledLabel2" class="text-center px-1 leading-tight">Inativo</span>
         </div>
-        <div class="flex gap-2 mt-3 w-full">
-          <button id="btnOn2" class="btn-action btn-on" disabled>🔛 Ligar</button>
-          <button id="btnOff2" class="btn-action btn-off" disabled>⏻ Desl.</button>
+        <div class="flex gap-2 mt-3">
+          <button id="btnOn2" class="btn-action btn-on" disabled>Ligar</button>
+          <button id="btnOff2" class="btn-action btn-off" disabled>Desligar</button>
         </div>
       </div>
 
       <!-- LED 3 -->
-      <div class="flex flex-col items-center p-4 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30">
-        <div class="text-sm font-medium text-[#1f3a57] mb-2">LED 3</div>
+      <div class="led-card">
+        <div class="text-xs font-semibold text-[#2a4a6a] text-center uppercase tracking-wider mb-2 opacity-70">LED 3</div>
         <div id="ledCircle3" class="led-circle led-off">
-          <span id="ledLabel3" class="text-center px-1">Inativo</span>
+          <span id="ledLabel3" class="text-center px-1 leading-tight">Inativo</span>
         </div>
-        <div class="flex gap-2 mt-3 w-full">
-          <button id="btnOn3" class="btn-action btn-on" disabled>🔛 Ligar</button>
-          <button id="btnOff3" class="btn-action btn-off" disabled>⏻ Desl.</button>
+        <div class="flex gap-2 mt-3">
+          <button id="btnOn3" class="btn-action btn-on" disabled>Ligar</button>
+          <button id="btnOff3" class="btn-action btn-off" disabled>Desligar</button>
         </div>
       </div>
     </div>
 
-    <!-- Controles globais -->
-    <div class="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2">
-      <button id="btnAllOn" class="btn-action btn-on" disabled>🔛 Ligar Todos</button>
-      <button id="btnAllOff" class="btn-action btn-off" disabled>⏻ Desligar Todos</button>
+    <!-- Controles Globais -->
+    <div class="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 border-t border-white/30">
+      <button id="btnAllOn" class="btn-action btn-all-on" disabled>✨ Ligar Todos</button>
+      <button id="btnAllOff" class="btn-action btn-all-off" disabled>⚡ Desligar Todos</button>
     </div>
 
-    <!-- rodapé discreto com info de conexão -->
-    <div class="mt-6 text-center text-[10px] text-[#4d6e8f] opacity-50 tracking-wider font-light border-t border-white/30 pt-4">
-      <span> broker.hivemq.com • WebSocket Secure </span>
+    <!-- Rodapé -->
+    <div class="mt-6 text-center text-[10px] text-[#5a7a9a] opacity-40 tracking-wider font-light border-t border-white/30 pt-4">
+      <span>broker.hivemq.com • WebSocket Secure • v2.0</span>
     </div>
   </div>
 </div>
@@ -258,7 +365,7 @@
   (function() {
     "use strict";
 
-    // ---- DOM refs ----
+    // DOM refs
     const statusDot = document.getElementById('statusDot');
     const statusLabel = document.getElementById('statusLabel');
     const topicInput = document.getElementById('topicInput');
@@ -294,14 +401,12 @@
     const btnAllOn = document.getElementById('btnAllOn');
     const btnAllOff = document.getElementById('btnAllOff');
 
-    // ---- Estado ----
     let currentTopic = topicInput.value.trim() || 'gerry_sanchez_led_exclusivo/arduino';
     let client = null;
     let isConnected = false;
 
-    // ---- Helpers UI ----
+    // UI Helpers
     function updateLedUI(ledIndex, state) {
-      // state: 0 ou 1 (número)
       const led = leds[ledIndex];
       if (state === 1) {
         led.circle.classList.remove('led-off');
@@ -338,20 +443,20 @@
       btnAllOff.disabled = !enabled;
     }
 
-    // ---- MQTT ----
+    // MQTT
     function connectMQTT() {
       if (client && client.isConnected()) {
         client.disconnect();
       }
 
-      const clientId = 'web_' + Math.random().toString(16).substr(2, 8) + '_' + Date.now();
+      const clientId = 'web_' + Math.random().toString(36).substr(2, 10) + '_' + Date.now();
       client = new Paho.MQTT.Client('broker.hivemq.com', Number(8884), clientId);
 
       client.onConnectionLost = function(response) {
         isConnected = false;
         setStatus('offline', 'Conexão perdida');
         setButtonsEnabled(false);
-        console.warn('MQTT connection lost:', response.errorCode, response.errorMessage);
+        console.warn('MQTT connection lost:', response.errorCode);
         setTimeout(() => {
           if (!isConnected) {
             connectMQTT();
@@ -361,26 +466,26 @@
 
       client.onMessageArrived = function(message) {
         const payload = message.payloadString.trim();
-        const topic = message.destinationName;
-        console.log(`📥 Mensagem recebida no tópico ${topic}: ${payload}`);
+        console.log(`📥 Mensagem recebida: ${payload}`);
         
-        // Formato esperado: "LEDx:1" ou "LEDx:0" ou "ALL:1" ou "ALL:0"
+        // Formato esperado: "LED1:1", "LED2:0", "ALL:1", etc.
         const parts = payload.split(':');
         if (parts.length === 2) {
           const target = parts[0].toUpperCase();
           const value = parseInt(parts[1]);
           
-          if (target === 'LED1' && !isNaN(value)) {
-            updateLedUI(0, value);
-          } else if (target === 'LED2' && !isNaN(value)) {
-            updateLedUI(1, value);
-          } else if (target === 'LED3' && !isNaN(value)) {
-            updateLedUI(2, value);
-          } else if (target === 'ALL' && !isNaN(value)) {
-            // Atualiza todos os LEDs
-            leds.forEach((led, index) => {
-              updateLedUI(index, value);
-            });
+          if (!isNaN(value) && (value === 0 || value === 1)) {
+            if (target === 'LED1') {
+              updateLedUI(0, value);
+            } else if (target === 'LED2') {
+              updateLedUI(1, value);
+            } else if (target === 'LED3') {
+              updateLedUI(2, value);
+            } else if (target === 'ALL') {
+              leds.forEach((_, index) => {
+                updateLedUI(index, value);
+              });
+            }
           }
         }
       };
@@ -410,9 +515,11 @@
     function doSubscribe(topic) {
       if (!client || !client.isConnected()) return;
       try {
-        client.unsubscribe(currentTopic, { onSuccess: function() {
-          console.log('📤 Desinscrito do tópico:', currentTopic);
-        }});
+        client.unsubscribe(currentTopic, { 
+          onSuccess: function() {
+            console.log('📤 Desinscrito do tópico:', currentTopic);
+          }
+        });
       } catch(e) {}
       
       client.subscribe(topic, { 
@@ -426,22 +533,21 @@
       currentTopic = topic;
     }
 
-    // ---- Publicar comando ----
+    // Publicar comando
     function publishCommand(command) {
       if (!client || !client.isConnected()) {
         setStatus('offline', 'Sem conexão');
         setButtonsEnabled(false);
         return;
       }
-      const topic = currentTopic;
       const msg = new Paho.MQTT.Message(command);
-      msg.destinationName = topic;
+      msg.destinationName = currentTopic;
       msg.qos = 1;
       client.send(msg);
-      console.log(`📤 Comando "${command}" publicado em ${topic}`);
+      console.log(`📤 Comando "${command}" publicado em ${currentTopic}`);
     }
 
-    // ---- Eventos dos botões individuais ----
+    // Eventos dos botões individuais
     leds.forEach((led, index) => {
       const ledNumber = index + 1;
       led.btnOn.addEventListener('click', function() {
@@ -452,7 +558,7 @@
       });
     });
 
-    // ---- Eventos dos botões globais ----
+    // Eventos dos botões globais
     btnAllOn.addEventListener('click', function() {
       publishCommand('ALL:1');
     });
@@ -460,7 +566,7 @@
       publishCommand('ALL:0');
     });
 
-    // ---- Input de tópico: ao mudar, reassina ----
+    // Tópico - reassinar automaticamente
     topicInput.addEventListener('change', function() {
       const newTopic = this.value.trim();
       if (!newTopic) {
@@ -496,12 +602,11 @@
       }
     });
 
-    // ---- Inicialização ----
+    // Inicialização
     function init() {
       setStatus('waiting', 'Sincronizando...');
       setButtonsEnabled(false);
-      // Inicia todos os LEDs desligados
-      leds.forEach((led, index) => {
+      leds.forEach((_, index) => {
         updateLedUI(index, 0);
       });
       connectMQTT();
@@ -509,6 +614,7 @@
 
     init();
 
+    // Reconexão automática quando voltar online
     window.addEventListener('online', function() {
       if (!isConnected) {
         connectMQTT();
